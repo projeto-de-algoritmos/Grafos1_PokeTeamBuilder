@@ -21,7 +21,7 @@ Temas:
 |Matrícula | Aluno |
 | -- | -- |
 | 18/0075462  |  Gabriel Freitas Balbino |
-| xx/xxxxxx  |  Thiago França Vale Oliveira |
+| 17/0114929  |  Thiago França Vale Oliveira |
 
 ## Sobre 
 Descreva os objetivos do seu projeto e como ele funciona. 
