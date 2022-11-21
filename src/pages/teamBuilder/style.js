@@ -88,3 +88,27 @@ export const ButtonText = styled.p`
     color: #FFF;
     text-align: center;
 `
+
+export const RandomPokemon = styled.div`
+
+    margin-top: 1%;
+    height: 19%;
+    width: 24.5%;
+    margin-left: 1%;
+    border-radius: 10px;
+    border: 3px solid #000;
+    background-color: #FFF;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    align-self: flex-end;
+`
+
+export const RandomText = styled.p`
+    width: 100%;
+    height: 100%;
+    font-size: 20px;
+    font-weight: bolder;
+    color: #000;
+    text-align: center;
+`
