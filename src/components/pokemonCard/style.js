@@ -28,6 +28,8 @@ export const FilledCard = styled.div`
     text-align: center;
     flex-flow: column;
     box-shadow: 0px 5px 10px 0px rgba(0, 0, 0, 0.5);
+    background-color: #FFF;
+
 `
 
 export const PokeImage = styled.img`

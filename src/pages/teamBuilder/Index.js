@@ -1,11 +1,11 @@
 import { useEffect, useState } from "react";
 import axios from 'axios';
 import PokemonCard from "../../components/pokemonCard/Index";
-import { ButtonText, CardsContainer, Container, Header, HeaderContainer, InputContainer, InputHeader, PokemonInput, RandomPokemon, RandomText, SearchContainer, Square, SubmitPokemon, texter } from './style';
+import { ButtonText, CardsContainer, Clear, Container, GenerateButton, GenerateButtonText, Header, HeaderContainer, InputContainer, InputHeader, PokemonInput, RandomPokemon, RandomText, SearchContainer, Square, SubmitPokemon, texter, X } from './style';
 
 const TeamBuilder = () => {
 
-    const lastPoke = 300;
+    const lastPoke = 385;
     const [pokemonList, setPokemonList] = useState([]);
     const [starterPokemonName, setStarterPokemonName] = useState();
     const [firstCard, setFirstCard] = useState([]);
@@ -39,6 +39,26 @@ const TeamBuilder = () => {
         }
     }
 
+    const generateTeam = () => {
+        for (let i = 1; i < 6; i++) {
+            let counter = findCounter(firstCard[i - 1]?.types[0]?.type?.name);
+            let counters = pokemonList.filter((pokemon) => {
+                if (pokemon.data.types[0].type.name === counter || pokemon?.data?.types[1]?.type?.name === counter) {
+                    return pokemon;
+                }
+            })
+            console.log(counters);
+            let teamMember = counters[Math.floor(Math.random() * counters.length)];
+            firstCard.push(teamMember.data);
+        }
+        setLastCardsFill(true);
+    }
+
+    const findCounter = (type) => {
+        const types = ['fire', 'grass', 'water', 'electric', 'normal']
+        return types[Math.floor(Math.random() * types.length)]
+    }
+
     const clearCards = () => {
         while (firstCard.length > 0) {
             firstCard.pop();
@@ -67,6 +87,14 @@ const TeamBuilder = () => {
                 <Header>
                     Your team:
                 </Header>
+                {firstCardFill ? (
+                    <Clear onClick={clearCards}>
+                        <X>
+                            X
+                        </X>
+                    </Clear>
+                )
+                    : <></>}
             </HeaderContainer>
             <CardsContainer>
                 <PokemonCard
@@ -131,14 +159,22 @@ const TeamBuilder = () => {
                             Add Starter
                         </ButtonText>
                     </SubmitPokemon>
+                    <RandomPokemon onClick={getRandomPokemon}>
+                        <RandomText>
+                            Random Starter
+                        </RandomText>
+                    </RandomPokemon>
                 </InputContainer>
-                <RandomPokemon onClick={getRandomPokemon}>
-                    <RandomText>
-                        Random Starter
-                    </RandomText>
-                </RandomPokemon>
+                {firstCardFill ? (
+                    <GenerateButton onClick={generateTeam}>
+                        <GenerateButtonText>
+                            Generate Team
+                        </GenerateButtonText>
+                    </GenerateButton>
+                )
+                    : <></>}
             </SearchContainer>
-        </Container>
+        </Container >
     )
 
 }
