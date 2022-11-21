@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import axios from 'axios';
 import PokemonCard from "../../components/pokemonCard/Index";
-import { ButtonText, CardsContainer, Clear, Container, GenerateButton, GenerateButtonText, Header, HeaderContainer, InputContainer, InputHeader, PokemonInput, RandomPokemon, RandomText, SearchContainer, Square, SubmitPokemon, texter, X } from './style';
+import { ButtonText, CardsContainer, Clear, Container, GenerateButton, GenerateButtonText, Header, HeaderContainer, InputContainer, InputHeader, PokemonInput, RandomPokemon, RandomText, SearchContainer, SubmitPokemon, X } from './style';
 
 const TeamBuilder = () => {
 
@@ -18,12 +18,12 @@ const TeamBuilder = () => {
         if (firstCard) {
             setFirstCardFill(true);
         }
-        console.log(firstCard);
+        //console.log(firstCard);
     }
 
     const getRandomPokemon = () => {
         const rnd = Math.floor(Math.random() * lastPoke)
-        console.log(rnd);
+        //console.log(rnd);
         selectStarter(rnd);
     }
 
@@ -47,7 +47,7 @@ const TeamBuilder = () => {
                     return pokemon;
                 }
             })
-            console.log(counters);
+            //console.log(counters);
             let teamMember = counters[Math.floor(Math.random() * counters.length)];
             firstCard.push(teamMember.data);
         }
@@ -55,7 +55,7 @@ const TeamBuilder = () => {
     }
 
     const findCounter = (type) => {
-        const types = ['fire', 'grass', 'water', 'electric', 'normal']
+        const types = ['fire', 'grass', 'water', 'electric', 'dark', 'ghost', 'rock', 'ground', 'ice', 'dragon']
         return types[Math.floor(Math.random() * types.length)]
     }
 
@@ -73,7 +73,7 @@ const TeamBuilder = () => {
             pokemons.push(`https://pokeapi.co/api/v2/pokemon/${i}/`);
         }
         await axios.all(pokemons.map((pokemon) => axios.get(pokemon))).then((res) => setPokemonList(res)).then(
-            console.log(pokemonList)
+            //console.log(pokemonList)
         );
     };
 
