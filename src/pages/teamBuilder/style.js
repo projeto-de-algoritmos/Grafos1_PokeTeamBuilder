@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import img from '../../assets/BG3.webp';
 
 export const Container = styled.div`
 
@@ -10,6 +11,8 @@ export const Container = styled.div`
     flex-wrap: wrap;
     flex-flow: column;
     overflow: hidden;
+    background-image: url(${img});
+    background-size: 100% 100%;
 `;
 
 export const CardsContainer = styled.div`
@@ -20,17 +23,20 @@ export const CardsContainer = styled.div`
 `
 export const Header = styled.h1`
 
+    align-self: center;
     font-size: 30px;
 `
 
 export const HeaderContainer = styled.div`
 
     display: flex;
-    justify-content: flex-start;
-    padding-left: 11.5%;
-    width: 100%;
+    justify-content: space-between;
+    width: 87%;
     height: 10%;
-    margin-top: 5%;
+    margin-top: 4%;
+    margin-left: 5%;
+    margin-right: 5%;
+    flex-flow: wrap;
 `
 
 export const SearchContainer = styled.div`
@@ -38,7 +44,7 @@ export const SearchContainer = styled.div`
     display: flex;
     width: 50%;
     height: 35%;
-    margin-top: 5%;
+    margin-top: 2%;
     justify-content: flex-start;
     align-items: center;
     flex-flow: column;
@@ -65,13 +71,19 @@ export const InputHeader = styled.h1`
 export const SubmitPokemon = styled.div`
 
     height: 100%;
-    width: 25%;
+    width: 20%;
     margin-left: 1%;
     border-radius: 10px;
     background-color: #000;
     align-items: center;
     justify-content: center;
     text-align: center;
+    cursor: pointer;
+
+    &:hover {
+        background-color: #999;
+        color: #444444;
+    }
 `
 export const InputContainer = styled.div`
     
@@ -91,9 +103,8 @@ export const ButtonText = styled.p`
 
 export const RandomPokemon = styled.div`
 
-    margin-top: 1%;
-    height: 19%;
-    width: 24.5%;
+    height: 100%;
+    width: 20%;
     margin-left: 1%;
     border-radius: 10px;
     border: 3px solid #000;
@@ -101,7 +112,13 @@ export const RandomPokemon = styled.div`
     align-items: center;
     justify-content: center;
     text-align: center;
-    align-self: flex-end;
+    box-sizing: border-box;
+    cursor: pointer;
+
+    &:hover {
+        background-color: #CCC;
+        color: #999;
+    }
 `
 
 export const RandomText = styled.p`
@@ -111,4 +128,52 @@ export const RandomText = styled.p`
     font-weight: bolder;
     color: #000;
     text-align: center;
+    margin-top: 10%;
+`
+export const GenerateButton = styled.div`
+    
+    height: 25%;
+    width: 25%;
+    margin-top: 5%;
+    border-radius: 10px;
+    background-color: #000;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    cursor: pointer;
+
+    &:hover {
+        background-color: #999;
+        color: #444444;
+    }
+`
+
+export const GenerateButtonText = styled.p`
+    width: 100%;
+    height: 100%;
+    font-size: 25px;
+    font-weight: bolder;
+    color: #FFF;
+    text-align: center;
+`
+export const Clear = styled.div`
+    height: 40px;
+    width: 40px;
+    border-radius: 40px;
+    background-color: #000;
+    align-self: center;
+    text-align: center;
+    cursor: pointer;
+
+    &:hover {
+        background-color: #999;
+        color: #444444;
+    }
+`
+
+export const X = styled.p`
+    font-size: 25px;
+    font-weight: bolder;
+    color: #FFF;
+    margin-top: 15%;
 `
