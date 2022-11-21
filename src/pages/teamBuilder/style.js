@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import img from '../../assets/BG3.webp';
+import img from '../../background/BG3.webp';
 
 export const Container = styled.div`
 
