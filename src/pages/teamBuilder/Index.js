@@ -19,6 +19,7 @@ const TeamBuilder = () => {
         firstCard.push(pokemonList[num]?.data);
         if (firstCard) {
             setFirstCardFill(true);
+            graphCicle.push(firstCard[0].types[0].type.name);
         }
         //console.log(firstCard);
     }
@@ -41,31 +42,35 @@ const TeamBuilder = () => {
         }
     }
 
-    const generateTeam = () => {
-        let type;
-        let teamMember;
+    const generateTeam = async () => {
         for (let i = 1; i < 6; i++) {
-            let counter = findCounter(firstCard[i - 1]?.types[0]?.type?.name);
-            let outCounter = findCounter(counter)
+            let counter = await findCounter(firstCard[i - 1]?.types[0]?.type?.name);
+            let outCounter = findCounter(counter);
             let counters = pokemonList.filter((pokemon) => {
-                if (pokemon.data.types[0].type.name === outCounter || pokemon?.data?.types[1]?.type?.name === outCounter) {
+                if (pokemon.data.types[0].type.name === outCounter) {
                     return pokemon;
-                }   
+                } else if (pokemon?.data?.types[1]?.type?.name === outCounter) {
+                    return pokemon;
+                }
             })
             //console.log(counters);
-            teamMember = counters[Math.floor(Math.random() * counters.length)];
+            let teamMember = counters[Math.floor(Math.random() * counters.length)];
             firstCard.push(teamMember?.data);
+            graphCicle.push(" - ")
+            graphCicle.push(counter);
+            graphCicle.push(" - ")
+            graphCicle.push(outCounter);
         }
         setLastCardsFill(true);
-        graphCicle.push(teamMember?.data?.types[0]?.type?.name);
     }
 
     const findCounter = (type) => {
-        graphCicle.push(type);
-        graphCicle.push('-');
+        //graphCicle.push(type);
+        //graphCicle.push('-');
         const types = typechart.find((tpchart) => {
             return tpchart.type_name === type;
         })
+        
         return types?.weakness[Math.floor(Math.random() * types?.weakness?.length)];
     }
 
@@ -85,9 +90,7 @@ const TeamBuilder = () => {
         for (let i = 1; i <= lastPoke; i++) {
             pokemons.push(`https://pokeapi.co/api/v2/pokemon/${i}/`);
         }
-        await axios.all(pokemons.map((pokemon) => axios.get(pokemon))).then((res) => setPokemonList(res)).then(
-            //console.log(pokemonList)
-        );
+        await axios.all(pokemons.map((pokemon) => axios.get(pokemon))).then((res) => setPokemonList(res));
     };
 
     useEffect(() => {
