@@ -35,7 +35,7 @@ const TeamBuilder = () => {
             return pkList.data.name === starterPokemonName.toLowerCase();
         })
         if (pknum >= 0) {
-            console.log(pknum);
+            //console.log(pknum);
             selectStarter(pknum);
         } else {
             alert('The typed pokemon isn\'t available or doesn\'t exists');
@@ -70,7 +70,7 @@ const TeamBuilder = () => {
         const types = typechart.find((tpchart) => {
             return tpchart.type_name === type;
         })
-        
+
         return types?.weakness[Math.floor(Math.random() * types?.weakness?.length)];
     }
 
