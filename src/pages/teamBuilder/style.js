@@ -177,3 +177,9 @@ export const X = styled.p`
     color: #FFF;
     margin-top: 15%;
 `
+
+export const GraphText = styled.p`
+    font-size: 21px;
+    font-weight: bolder;
+    color: #000;
+`

@@ -3,7 +3,7 @@ function type(type_name,weakness) {
     this.weakness = weakness;
     
 }
-var typechart = [
+export const typechart = [
     new type('normal',['fighting']),
     new type('fire',['water','ground','rock']),
     new type('water',['grass','eletric']),

@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react";
 import axios from 'axios';
 import PokemonCard from "../../components/pokemonCard/Index";
-import { ButtonText, CardsContainer, Clear, Container, GenerateButton, GenerateButtonText, Header, HeaderContainer, InputContainer, InputHeader, PokemonInput, RandomPokemon, RandomText, SearchContainer, SubmitPokemon, X } from './style';
+import { ButtonText, CardsContainer, Clear, Container, GenerateButton, GenerateButtonText, GraphText, Header, HeaderContainer, InputContainer, InputHeader, PokemonInput, RandomPokemon, RandomText, SearchContainer, SubmitPokemon, X } from './style';
+import { typechart } from "../../utils/functions";
 
 const TeamBuilder = () => {
 
@@ -11,6 +12,7 @@ const TeamBuilder = () => {
     const [firstCard, setFirstCard] = useState([]);
     const [firstCardFill, setFirstCardFill] = useState(false);
     const [lastCardsFill, setLastCardsFill] = useState(false);
+    const [graphCicle, setGraphCicle] = useState([]);
 
     const selectStarter = async (num) => {
         await clearCards();
@@ -40,28 +42,39 @@ const TeamBuilder = () => {
     }
 
     const generateTeam = () => {
+        let type;
+        let teamMember;
         for (let i = 1; i < 6; i++) {
             let counter = findCounter(firstCard[i - 1]?.types[0]?.type?.name);
+            let outCounter = findCounter(counter)
             let counters = pokemonList.filter((pokemon) => {
-                if (pokemon.data.types[0].type.name === counter || pokemon?.data?.types[1]?.type?.name === counter) {
+                if (pokemon.data.types[0].type.name === outCounter || pokemon?.data?.types[1]?.type?.name === outCounter) {
                     return pokemon;
-                }
+                }   
             })
             //console.log(counters);
-            let teamMember = counters[Math.floor(Math.random() * counters.length)];
-            firstCard.push(teamMember.data);
+            teamMember = counters[Math.floor(Math.random() * counters.length)];
+            firstCard.push(teamMember?.data);
         }
         setLastCardsFill(true);
+        graphCicle.push(teamMember?.data?.types[0]?.type?.name);
     }
 
     const findCounter = (type) => {
-        const types = ['fire', 'grass', 'water', 'electric', 'dark', 'ghost', 'rock', 'ground', 'ice', 'dragon']
-        return types[Math.floor(Math.random() * types.length)]
+        graphCicle.push(type);
+        graphCicle.push('-');
+        const types = typechart.find((tpchart) => {
+            return tpchart.type_name === type;
+        })
+        return types?.weakness[Math.floor(Math.random() * types?.weakness?.length)];
     }
 
     const clearCards = () => {
         while (firstCard.length > 0) {
             firstCard.pop();
+        }
+        while (graphCicle.length > 0) {
+            graphCicle.pop();
         }
         setFirstCardFill(false);
         setLastCardsFill(false);
@@ -165,14 +178,27 @@ const TeamBuilder = () => {
                         </RandomText>
                     </RandomPokemon>
                 </InputContainer>
-                {firstCardFill ? (
+                {firstCardFill && !lastCardsFill ? (
                     <GenerateButton onClick={generateTeam}>
                         <GenerateButtonText>
                             Generate Team
                         </GenerateButtonText>
                     </GenerateButton>
                 )
-                    : <></>}
+                    : (<>
+                        {lastCardsFill ?
+                            <>
+                                <InputHeader>
+                                    Graph cicle to achieve this team:
+                                </InputHeader>
+                                <GraphText>
+                                    {graphCicle}
+                                </GraphText>
+                            </>
+                            : <></>}
+                    </>
+                    )
+                }
             </SearchContainer>
         </Container >
     )
